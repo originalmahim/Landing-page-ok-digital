@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // const toEn = n => n.replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
 
 const foodItems = [
@@ -7,7 +7,7 @@ const foodItems = [
     title: "গাছ চুইঝাল",
     weight: "৫০০ গ্রাম",
     price: 360,
-    priceInBd: '৩৬০',
+    priceInBd: "৩৬০",
     quantity: 1,
   },
   {
@@ -15,7 +15,7 @@ const foodItems = [
     title: "গাছ চুইঝাল",
     weight: "১ কেজি",
     price: 700,
-    priceInBd: '৭০০',
+    priceInBd: "৭০০",
     quantity: 1,
   },
   {
@@ -23,7 +23,7 @@ const foodItems = [
     title: "এটো চুইঝাল",
     weight: "৫০০ গ্রাম",
     price: 360,
-    priceInBd: '৩৬০',
+    priceInBd: "৩৬০",
     quantity: 1,
   },
   {
@@ -31,16 +31,69 @@ const foodItems = [
     title: "এটো চুইঝাল",
     weight: "১ কেজি",
     price: 700,
-    priceInBd: '৭০০', 
+    priceInBd: "৭০০",
     quantity: 1,
   },
 ];
 
-const toEn = n => n.replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
+const toEn = (n) => n.replace(/[০-৯]/g, (d) => "০১২৩৪৫৬৭৮৯".indexOf(d));
 
 const toBn = (n) => n.replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
 
 const Orders3 = () => {
+  const [foodDatas, setFoodDatas] = useState(foodItems);
+  const [chackedItem, setChackedItem] = useState(null);
+  const [totalItem, setTotalItem] = useState(1);
+  const [quantity1, setQuantityof1] = useState(1);
+  const [quantity2, setQuantityof2] = useState(1);
+  const [quantity3, setQuantityof3] = useState(1);
+  const [quantity4, setQuantityof4] = useState(1);
+  const [delivaryType, setDelivaryType] = useState('ঢাকার ভেতরে');
+  const [delivaryCharge, setDelivaryCharge] = useState('৮০');
+  const handleRadioChange = (event) => {
+    setSelectedOption(event.target.value);
+    
+  };
+
+  console.log(chackedItem);
+  
+
+  const handleDelivaryType = (e) =>{
+    setDelivaryType(e.target.value)
+    event.target.value === 'ঢাকার ভেতরে' ? setDelivaryCharge('৮০') : setDelivaryCharge('১০০')
+  }
+  console.log(delivaryType);
+
+  const plusQuantity = (id) => {
+    if (id === 1) {
+      setQuantityof1(quantity1 + 1);
+    }
+    if (id === 2) {
+      setQuantityof2(quantity2 + 1);
+    }
+    if (id === 3) {
+      setQuantityof3(quantity3 + 1);
+    }
+    if (id === 4) {
+      setQuantityof4(quantity4 + 1);
+    }
+    
+  };
+  const minusQuantity = (id) => {
+    if (id === 1) {
+      setQuantityof1(quantity1 - 1);
+    }
+    if (id === 2) {
+      setQuantityof2(quantity2 - 1);
+    }
+    if (id === 3) {
+      setQuantityof3(quantity3 - 1);
+    }
+    if (id === 4) {
+      setQuantityof4(quantity4 - 1);
+    }
+  };
+  
   return (
     <div id="order" className="pb-4 pt-12">
       <h1 className="text-3xl font-bold text-center text-green-600 mb-3">
@@ -52,12 +105,16 @@ const Orders3 = () => {
       <div>
         <div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mx-auto">
-            {foodItems.map((food) => (
-              <div key={food.id} className="w-full md:w-72 h-20 bg-slate-100 flex items-center ps-4 border border-gray-200 rounded-md dark:border-gray-700">
+            {foodDatas.map((food) => (
+              <div
+                key={food.id}
+                className="w-full md:w-72 h-20 bg-slate-100 flex items-center ps-4 border border-gray-200 rounded-md dark:border-gray-700"
+              >
                 <input
                   id="bordered-radio-1"
                   type="radio"
-                  value=""
+                  value={food.id}
+                  onChange={() => setChackedItem(food.id)}
                   name="bordered-radio"
                   className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500  "
                 />
@@ -71,9 +128,11 @@ const Orders3 = () => {
                       <p>{food.weight}</p>
                     </div>
                     <div className="text-center">
-                      <h1 className="font-bold text-green-600">ট{food.priceInBd}</h1>
+                      <h1 className="font-bold text-green-600">
+                        ট{food.priceInBd}
+                      </h1>
                       <div className="flex justify-center items-center gap-2">
-                        <button className="bg-slate-100 rounded-md p-1">
+                        <button onClick={() => minusQuantity(food.id)} className="bg-slate-100 rounded-md p-1">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-minus"
@@ -90,8 +149,13 @@ const Orders3 = () => {
                             <path d="M5 12l14 0" />
                           </svg>
                         </button>
-                        <p>{food.quantity}</p>
-                        <button className="bg-slate-100 rounded-md p-1">
+                        {
+                          food.id === 1 ? <p>{quantity1}</p> : food.id ===2 ? <p>{quantity2}</p> : food.id === 3 ? <p>{quantity3}</p> : <p>{quantity4}</p>
+                        }
+                        <button
+                          onClick={() => plusQuantity(food.id)}
+                          className="bg-slate-100 rounded-md p-1"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-plus"
@@ -115,250 +179,7 @@ const Orders3 = () => {
                 </label>
               </div>
             ))}
-            {/* <div className="w-full md:w-72 h-20 bg-slate-100 flex items-center ps-4 border border-gray-200 rounded-md dark:border-gray-700">
-              <input
-                id="bordered-radio-1"
-                type="radio"
-                value=""
-                name="bordered-radio"
-                className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500  "
-              />
-              <label
-                for="bordered-radio-1"
-                className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h1>গাছ চুইঝাল</h1>
-                    <p>৫০০ গ্রাম</p>
-                  </div>
-                  <div className="text-center">
-                    <h1 className="font-bold text-green-600">ট৩৫০</h1>
-                    <div className="flex justify-center items-center gap-2">
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-minus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                      <p>1</p>
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-plus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M12 5l0 14" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div className="w-full md:w-72 h-20 bg-slate-100 flex items-center ps-4 border border-gray-200 rounded-md dark:border-gray-700">
-              <input
-                id="bordered-radio-1"
-                type="radio"
-                value=""
-                name="bordered-radio"
-                className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500  "
-              />
-              <label
-                for="bordered-radio-1"
-                className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h1>গাছ চুইঝাল</h1>
-                    <p>৫০০ গ্রাম</p>
-                  </div>
-                  <div className="text-center">
-                    <h1 className="font-bold text-green-600">ট৩৫০</h1>
-                    <div className="flex justify-center items-center gap-2">
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-minus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                      <p>1</p>
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-plus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M12 5l0 14" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div className="w-full md:w-72 h-20 bg-slate-100 flex items-center ps-4 border border-gray-200 rounded-md dark:border-gray-700">
-              <input
-                id="bordered-radio-1"
-                type="radio"
-                value=""
-                name="bordered-radio"
-                className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500  "
-              />
-              <label
-                for="bordered-radio-1"
-                className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h1>গাছ চুইঝাল</h1>
-                    <p>৫০০ গ্রাম</p>
-                  </div>
-                  <div className="text-center">
-                    <h1 className="font-bold text-green-600">ট৩৫০</h1>
-                    <div className="flex justify-center items-center gap-2">
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-minus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                      <p>1</p>
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-plus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M12 5l0 14" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div className="w-full md:w-72 h-20 bg-slate-100 flex items-center ps-4 border border-gray-200 rounded-md dark:border-gray-700">
-              <input
-                id="bordered-radio-1"
-                type="radio"
-                value=""
-                name="bordered-radio"
-                className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500  "
-              />
-              <label
-                for="bordered-radio-1"
-                className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h1>গাছ চুইঝাল</h1>
-                    <p>৫০০ গ্রাম</p>
-                  </div>
-                  <div className="text-center">
-                    <h1 className="font-bold text-green-600">ট৩৫০</h1>
-                    <div className="flex justify-center items-center gap-2">
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-minus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                      <p>1</p>
-                      <button className="bg-slate-100 rounded-md p-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="icon icon-tabler icon-tabler-plus"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          stroke-width="2"
-                          stroke="currentColor"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M12 5l0 14" />
-                          <path d="M5 12l14 0" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </label>
-            </div> */}
+            
           </div>
           <div>
             <div className="flex flex-col md:flex-row gap-2 md:gap-8 w-full mx-auto">
@@ -414,11 +235,12 @@ const Orders3 = () => {
                       <select
                         id="country"
                         name="country"
+                        onChange={handleDelivaryType}
                         autoComplete="country-name"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
                       >
-                        <option>Inside Dhaka</option>
-                        <option>Outside Dhaka</option>
+                        <option value={'ঢাকার ভেতরে'}>Inside Dhaka</option>
+                        <option value={'ঢাকার বাহিরে'}>Outside Dhaka</option>
                       </select>
                     </div>
                   </div>
@@ -466,10 +288,11 @@ const Orders3 = () => {
                         <h1 className="font-semibold text-base">
                           ডেলিভারী চার্জ
                         </h1>
-                        <p>ঢাকার ভেতরে</p>
+                        <p>{delivaryType}</p>
                       </div>
                       <div className="text-center">
-                        <h1 className="font-bold text-green-600">ট৮০</h1>
+                        <h1 className="font-bold text-green-600">ট{delivaryCharge}</h1>
+                        
                       </div>
                     </div>
                   </div>
