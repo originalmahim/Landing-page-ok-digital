@@ -65,7 +65,7 @@ const CustomerReview = () => {
     nextArrow: <SlickArrowRight />,
   };
   return (
-    <div id="review" className="my-2">
+    <div id="review1" className="my-2">
       <h1 className="text-3xl font-bold text-center text-green-600 mb-12">
         কাস্টমার রিভিউ
       </h1>

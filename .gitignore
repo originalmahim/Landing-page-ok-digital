@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# extra data
+5DB3571A8A0D54B3D1F947B76FA14022085B
+# server 
+smtp.elasticemail.com
+# port
+2525

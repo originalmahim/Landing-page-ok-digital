@@ -3,6 +3,8 @@ import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { Player, BigPlayButton } from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
+import ReactPlayer from "react-player";
+
 const benefits = [
   "গরুর মাংস",
   "হাঁসের মাংস",
@@ -18,7 +20,7 @@ const benefits = [
   "চটপটি",
 ];
 
-const Headers = () => {
+const Headers2 = () => {
   return (
     <>
       <div id="about" className="mx-auto max-w-7xl">
@@ -81,16 +83,21 @@ const Headers = () => {
               </a>
             </div>
           </div>
-          <div className="h-full  w-80 md:w-full mx-auto flex-none rounded-[10px] object-cover shadow-xl lg:max-w-sm">
-            <Player
-              src="/icons/video.mp4"
-              // fluid={false}
-              // height={547}
-              // width={320}
-              poster="https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411196028_863897912410175_7176641708716339469_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=S2KLsdyEx4wAX8-6E9q&_nc_ht=scontent.fdac5-2.fna&oh=00_AfAlgruH4D3W65FjFKKJlwZOTQjN_wLilSbQrtvnkSOKlg&oe=6587E571"
+          <div className="h-full  w-full  mx-auto flex-none rounded-[10px] object-cover shadow-xl lg:max-w-sm">
+            {/* <Player
+              src="https://www.facebook.com/reel/205996419189459"
+            //   fluid={false}
+            //   height={547}
+            //   width={320}
+            //   poster="https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411196028_863897912410175_7176641708716339469_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=S2KLsdyEx4wAX8-6E9q&_nc_ht=scontent.fdac5-2.fna&oh=00_AfAlgruH4D3W65FjFKKJlwZOTQjN_wLilSbQrtvnkSOKlg&oe=6587E571"
             >
               <BigPlayButton position="center" />
-            </Player>
+            </Player> */}
+            <ReactPlayer
+              width="100%"
+              height="100%"
+              url="https://www.facebook.com/ecoeatsbangladesh/videos/1998056963903868"
+            />
           </div>
         </div>
       </div>
@@ -98,4 +105,4 @@ const Headers = () => {
   );
 };
 
-export default Headers;
+export default Headers2;

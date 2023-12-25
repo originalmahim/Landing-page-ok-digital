@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // const toEn = n => n.replace(/[০-৯]/g, d => "০১২৩৪৫৬৭৮৯".indexOf(d));
 
 const foodItems = [
@@ -36,32 +36,33 @@ const foodItems = [
   },
 ];
 
-const toEn = (n) => n.replace(/[০-৯]/g, (d) => "০১২৩৪৫৬৭৮৯".indexOf(d));
+// const toEn = (n) => n.replace(/[০-৯]/g, (d) => "০১২৩৪৫৬৭৮৯".indexOf(d));
 
-const toBn = (n) => n.replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
+// const toBn = (n) => n.replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[d]);
 
 const Orders3 = () => {
   const [foodDatas, setFoodDatas] = useState(foodItems);
-  const [chackedItem, setChackedItem] = useState(null);
+  const [chackedItem, setChackedItem] = useState(1);
   const [totalItem, setTotalItem] = useState(1);
   const [quantity1, setQuantityof1] = useState(1);
   const [quantity2, setQuantityof2] = useState(1);
   const [quantity3, setQuantityof3] = useState(1);
   const [quantity4, setQuantityof4] = useState(1);
-  const [delivaryType, setDelivaryType] = useState('ঢাকার ভেতরে');
-  const [delivaryCharge, setDelivaryCharge] = useState('৮০');
-  const handleRadioChange = (event) => {
-    setSelectedOption(event.target.value);
-    
-  };
+  const [delivaryType, setDelivaryType] = useState("ঢাকার ভেতরে");
+  const [delivaryCharge, setDelivaryCharge] = useState("৮০");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   console.log(chackedItem);
-  
+  const selectedFood = foodDatas.find((food) => food.id === chackedItem);
 
-  const handleDelivaryType = (e) =>{
-    setDelivaryType(e.target.value)
-    event.target.value === 'ঢাকার ভেতরে' ? setDelivaryCharge('৮০') : setDelivaryCharge('১০০')
-  }
+  const handleDelivaryType = (e) => {
+    setDelivaryType(e.target.value);
+    event.target.value === "ঢাকার ভেতরে"
+      ? setDelivaryCharge("৮০")
+      : setDelivaryCharge("১০০");
+  };
   console.log(delivaryType);
 
   const plusQuantity = (id) => {
@@ -77,7 +78,6 @@ const Orders3 = () => {
     if (id === 4) {
       setQuantityof4(quantity4 + 1);
     }
-    
   };
   const minusQuantity = (id) => {
     if (id === 1) {
@@ -93,7 +93,56 @@ const Orders3 = () => {
       setQuantityof4(quantity4 - 1);
     }
   };
-  
+
+  const orderedData = {
+    name,
+    address,
+    phone,
+    delivaryType,
+    quantity:
+      chackedItem === 1
+        ? quantity1
+        : chackedItem === 2
+        ? quantity2
+        : chackedItem === 3
+        ? quantity3
+        : quantity4,
+    Food: selectedFood.title,
+    foodPrice: selectedFood.price,
+    TotalAmount:
+      selectedFood.price *
+        (chackedItem === 1
+          ? quantity1
+          : chackedItem === 2
+          ? quantity2
+          : chackedItem === 3
+          ? quantity3
+          : quantity4) +
+      (delivaryCharge === "৮০" ? 80 : 100),
+  };
+  console.log(orderedData);
+
+  const onOrderSubmit = async () => {
+    try {
+      const response = await fetch("https://chui-jhal-server.vercel.app/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderedData),
+      });
+
+      if (response.ok) {
+        alert("Order Food successfull!");
+
+      } else {
+        console.error("Failed to send email:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
+
   return (
     <div id="order" className="pb-4 pt-12">
       <h1 className="text-3xl font-bold text-center text-green-600 mb-3">
@@ -113,6 +162,7 @@ const Orders3 = () => {
                 <input
                   id="bordered-radio-1"
                   type="radio"
+                  checked={chackedItem === food.id ? true : false}
                   value={food.id}
                   onChange={() => setChackedItem(food.id)}
                   name="bordered-radio"
@@ -132,7 +182,10 @@ const Orders3 = () => {
                         ট{food.priceInBd}
                       </h1>
                       <div className="flex justify-center items-center gap-2">
-                        <button onClick={() => minusQuantity(food.id)} className="bg-slate-100 rounded-md p-1">
+                        <button
+                          onClick={() => minusQuantity(food.id)}
+                          className="bg-slate-100 rounded-md p-1"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             class="icon icon-tabler icon-tabler-minus"
@@ -149,9 +202,15 @@ const Orders3 = () => {
                             <path d="M5 12l14 0" />
                           </svg>
                         </button>
-                        {
-                          food.id === 1 ? <p>{quantity1}</p> : food.id ===2 ? <p>{quantity2}</p> : food.id === 3 ? <p>{quantity3}</p> : <p>{quantity4}</p>
-                        }
+                        {food.id === 1 ? (
+                          <p>{quantity1}</p>
+                        ) : food.id === 2 ? (
+                          <p>{quantity2}</p>
+                        ) : food.id === 3 ? (
+                          <p>{quantity3}</p>
+                        ) : (
+                          <p>{quantity4}</p>
+                        )}
                         <button
                           onClick={() => plusQuantity(food.id)}
                           className="bg-slate-100 rounded-md p-1"
@@ -179,7 +238,6 @@ const Orders3 = () => {
                 </label>
               </div>
             ))}
-            
           </div>
           <div>
             <div className="flex flex-col md:flex-row gap-2 md:gap-8 w-full mx-auto">
@@ -200,6 +258,7 @@ const Orders3 = () => {
                       <input
                         type="text"
                         name="company"
+                        onChange={(e) => setName(e.target.value)}
                         id="company"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
                       />
@@ -217,6 +276,7 @@ const Orders3 = () => {
                       <input
                         type="text"
                         name="address"
+                        onChange={(e) => setAddress(e.target.value)}
                         id="address"
                         autoComplete="street-address"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
@@ -239,8 +299,8 @@ const Orders3 = () => {
                         autoComplete="country-name"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
                       >
-                        <option value={'ঢাকার ভেতরে'}>Inside Dhaka</option>
-                        <option value={'ঢাকার বাহিরে'}>Outside Dhaka</option>
+                        <option value={"ঢাকার ভেতরে"}>Inside Dhaka</option>
+                        <option value={"ঢাকার বাহিরে"}>Outside Dhaka</option>
                       </select>
                     </div>
                   </div>
@@ -255,7 +315,8 @@ const Orders3 = () => {
                     <div className="mt-1">
                       <input
                         type="text"
-                        name="city"
+                        name="phone"
+                        onChange={(e) => setPhone(e.target.value)}
                         id="city"
                         autoComplete="address-level2"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 sm:text-sm"
@@ -276,11 +337,24 @@ const Orders3 = () => {
                   <div className="py-3">
                     <div className="flex justify-between items-center">
                       <div>
-                        <h1 className="font-semibold text-base">গাছ চুইঝাল</h1>
-                        <p>৫০০ গ্রাম x ১</p>
+                        <h1 className="font-semibold text-base">
+                          {selectedFood.title}
+                        </h1>
+                        <>
+                          ৫০০ গ্রাম x{" "}
+                          {chackedItem === 1
+                            ? quantity1
+                            : chackedItem === 2
+                            ? quantity2
+                            : chackedItem === 3
+                            ? quantity3
+                            : quantity4}
+                        </>
                       </div>
                       <div className="text-center">
-                        <h1 className="font-bold text-green-600">ট৩৫০</h1>
+                        <h1 className="font-bold text-green-600">
+                          ট{selectedFood.priceInBd}
+                        </h1>
                       </div>
                     </div>
                     <div className="flex justify-between items-center mt-4">
@@ -291,14 +365,26 @@ const Orders3 = () => {
                         <p>{delivaryType}</p>
                       </div>
                       <div className="text-center">
-                        <h1 className="font-bold text-green-600">ট{delivaryCharge}</h1>
-                        
+                        <h1 className="font-bold text-green-600">
+                          ট{delivaryCharge}
+                        </h1>
                       </div>
                     </div>
                   </div>
                   <div className="flex justify-between items-center border-t border-slate-300 pt-2">
                     <h1 className="font-semibold">সর্বমোট</h1>
-                    <h1 className="font-semibold text-green-600">ট৭০০</h1>
+                    <h1 className="font-semibold text-green-600">
+                      ট{" "}
+                      {selectedFood.price *
+                        (chackedItem === 1
+                          ? quantity1
+                          : chackedItem === 2
+                          ? quantity2
+                          : chackedItem === 3
+                          ? quantity3
+                          : quantity4) +
+                        (delivaryCharge === "৮০" ? 80 : 100)}
+                    </h1>
                   </div>
                   <div className="flex justify-between items-center  mt-8">
                     <h1 className="font-semibold">ডেলিভারী মেথড</h1>
@@ -306,7 +392,7 @@ const Orders3 = () => {
                       ক্যাশ অন ডেলিভারী
                     </h1>
                   </div>
-                  <button className="rounded-[10px] bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center absolute bottom-0 right-0">
+                  <button onClick={onOrderSubmit} disabled={name === '' || phone == '' ? true : false } className="rounded-[10px] bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center absolute bottom-0 right-0">
                     <div className="flex gap-2 justify-center items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

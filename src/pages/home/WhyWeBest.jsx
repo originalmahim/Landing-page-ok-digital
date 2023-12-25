@@ -3,7 +3,7 @@ import Container from "../../components/Container";
 
 const WhyWeBest = () => {
   return (
-    <div  id="features" className="my-28">
+    <div  id="features" className="my-28 w-full">
       <Container>
         <h1 className="text-3xl font-bold text-center text-green-600 mb-12">কেন আমরাই সেরা</h1>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

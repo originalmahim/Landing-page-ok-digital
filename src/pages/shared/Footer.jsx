@@ -100,7 +100,7 @@ const Footer = () => {
                 সোশ্যাল মিডিয়া
               </header>
               <div className="flex gap-2 items-center">
-                <a className="h-10 cursor-pointer w-10 flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600">
+                <a className="h-10 cursor-pointer w-10 flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-users rounded-md"
@@ -120,7 +120,7 @@ const Footer = () => {
                     <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
                   </svg>
                 </a>
-                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600">
+                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-brand-facebook"
@@ -137,7 +137,7 @@ const Footer = () => {
                     <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
                   </svg>
                 </a>
-                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600">
+                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-mail"
@@ -155,7 +155,7 @@ const Footer = () => {
                     <path d="M3 7l9 6l9 -6" />
                   </svg>
                 </a>
-                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600">
+                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-headset"
@@ -202,23 +202,7 @@ const Footer = () => {
           </aside>
         </footer>
       </Container>
-      {/* <button onClick={scrollToTop}  className="h-10 absolute right-3 bottom-14 cursor-pointer w-10 flex items-center justify-center rounded-md bg-slate-400 hover:bg-green-600">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-chevron-up text-white"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M6 15l6 -6l6 6"></path>
-        </svg>
-      </button> */}
+      
     </div>
   );
 };
