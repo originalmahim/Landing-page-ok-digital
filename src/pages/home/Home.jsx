@@ -13,6 +13,7 @@ import Review2 from "./Review2";
 import Gallary2 from "./Gallary2";
 import Orders from "./Orders";
 import Headers2 from "./Headers2";
+import Banner from "./Banner";
 
 const Home = () => {
   return (
@@ -24,6 +25,7 @@ const Home = () => {
               <Headers2></Headers2>
               {/* <Headers></Headers> */}
               <WhyWeBest></WhyWeBest>
+              <Banner></Banner>
               <Review2></Review2>
               {/* <CustomerReview></CustomerReview> */}
               <Faq></Faq>

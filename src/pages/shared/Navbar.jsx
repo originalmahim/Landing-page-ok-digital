@@ -18,7 +18,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 1000) {
+      if (window.scrollY > 100) {
         setShowBorder(true);
         // console.log("yes scrolled");
       } else {

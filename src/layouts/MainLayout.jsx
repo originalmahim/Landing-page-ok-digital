@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../pages/shared/Footer";
 import Navbar from "../pages/shared/Navbar";
 import { Providers } from "../Redux/providers";
-// import { Scrollbar } from "react-scrollbars-custom";
-// import { Scrollbars } from "rc-scrollbars";
+
 
 const MainLayout = () => {
   const scrollToTop = () => {
@@ -35,8 +34,6 @@ const MainLayout = () => {
   const borderClasses = showBorder
     ? " shadow-md ease-in duration-100"
     : "border-transparent border-red-200 hidden";
-
-
 
   return (
     <>

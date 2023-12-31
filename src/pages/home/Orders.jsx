@@ -1,5 +1,4 @@
-import { RadioGroup } from "@headlessui/react";
-import { CheckCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
+import toast, { Toaster } from "react-hot-toast";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, selectCart, updateQuantity } from "../../Redux/cartSlice";
@@ -68,11 +67,11 @@ const products = [
 const Orders = () => {
   const cart = useSelector(selectCart);
   let foodDatas = cart.items;
-  let orderdFood = foodDatas.filter(food => food.checked === true);
+  let orderdFood = foodDatas.filter((food) => food.checked === true);
   // const [foodDatas, setFoodDatas] = useState(cart.items);
   const [chackedItem, setChackedItem] = useState(1);
   const [totalItem, setTotalItem] = useState(1);
-  const [selectQuantity, setSelectQuantity] = useState(null)
+  const [selectQuantity, setSelectQuantity] = useState(null);
   // const [setQuantity, setQuantityof] = useState(1);
   const [quantity1, setQuantityof1] = useState(1);
   const [quantity2, setQuantityof2] = useState(1);
@@ -107,19 +106,8 @@ const Orders = () => {
     deliveryMethods[0]
   );
 
- 
   console.log(foodDatas);
-  // const selectedFood = {
-  //   id: 1,
-  //   checked: true,
-  //   title: "গাছ চুইঝাল",
-  //   weight: "৫০০ গ্রাম",
-  //   price: 360,
-  //   priceInBd: "৩৬০",
-  //   quantity: 1,
-  //   photo:
-  //     "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411071827_864466802353286_1798985628233004209_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=_-K7JzHYGjwAX_CqnKT&_nc_ht=scontent.fdac5-2.fna&oh=00_AfCGyJqvQFORraW4L-ffAcW_1vBUpJMEdPpF3R6Y1A4UVA&oe=65878ABC",
-  // }
+
   const selectedFood = foodDatas.find((food) => food.id === chackedItem);
 
   const handleDelivaryType = (e) => {
@@ -130,34 +118,12 @@ const Orders = () => {
   };
   console.log(delivaryType);
 
-  const plusQuantity = (id) => {
-    if (id === 1) {
-      setQuantityof1(quantity1 + 1);
-    }
-    if (id === 2) {
-      setQuantityof2(quantity2 + 1);
-    }
-    if (id === 3) {
-      setQuantityof3(quantity3 + 1);
-    }
-    if (id === 4) {
-      setQuantityof4(quantity4 + 1);
-    }
-  };
-  const minusQuantity = (id) => {
-    if (id === 1) {
-      setQuantityof1(quantity1 - 1);
-    }
-    if (id === 2) {
-      setQuantityof2(quantity2 - 1);
-    }
-    if (id === 3) {
-      setQuantityof3(quantity3 - 1);
-    }
-    if (id === 4) {
-      setQuantityof4(quantity4 - 1);
-    }
-  };
+  // const notify = () => toast.success('Congratulations! আপনার অর্ডার সম্পন্ন হয়েছে',{duration: 4000,
+  //   position: 'top-right', style: {
+  //     borderRadius: '10px',
+  //     background: '#333',
+  //     color: '#fff',
+  //   },});
 
   const orderedData = {
     name,
@@ -201,7 +167,15 @@ const Orders = () => {
       );
 
       if (response.ok) {
-        alert("Order Food successfull!");
+        toast.success("Congratulations! আপনার অর্ডার সম্পন্ন হয়েছে", {
+          duration: 4000,
+          position: "top-right",
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
       } else {
         console.error("Failed to send email:", await response.text());
       }
@@ -216,17 +190,16 @@ const Orders = () => {
   const handleAddToCart = (id) => {
     dispatch(addItem(id));
     const cart = useSelector(selectCart);
-    setFoodDatas(cart.items)
+    setFoodDatas(cart.items);
   };
   // const handleUpdateQuantity = (e) => {
   //   const quantity = e.target.value;
   //   console.log(quantity)
   //   // dispatch(updateQuantity( {id, quantity} ));
   // };
-  
 
   return (
-    <div id="order" className="pb-4 pt-12">
+    <div id="order" className="pb-4 mt-28">
       <h1 className="text-3xl font-bold text-center text-green-600 mb-3">
         অর্ডার করুন এখনই
       </h1>
@@ -235,7 +208,7 @@ const Orders = () => {
       </p>
       <div>
         <div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mx-auto">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full mx-auto">
             {foodDatas.map((food) => (
               <div
                 onClick={()=>handleAddToCart(food.id)}
@@ -300,11 +273,90 @@ const Orders = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
           <div>
             <div className="flex flex-col md:flex-row gap-2 md:gap-8 w-full mx-auto">
-              <div className="mt-10 pt-10 w-full md:w-1/2">
+              <div className="  w-full md:w-1/2">
                 <h2 className="text-xl font-bold text-gray-900">
+                  প্রোডাক্ট নির্বাচন করুন
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-8 w-full mx-auto my-4">
+                  {foodDatas.map((food) => (
+                    <div
+                      onClick={() => handleAddToCart(food.id)}
+                      key={food.id}
+                      className={`w-full cursor-pointer relative md:w-72 h-28 bg-slate-100 flex items-center ps-4 border-[3px]  rounded-md dark:border-gray-700 ${
+                        food.checked ? "border-green-600" : "border-gray-200"
+                      }`}
+                    >
+                      <div className="flex justify-between w-full">
+                        <div className="flex gap-2">
+                          <img
+                            src={food.photo}
+                            className="h-20 w-16 rounded-md"
+                            alt=""
+                          />
+                          <div>
+                            <h1 className="font-semibold mb-4">{food.title}</h1>
+                            <p className="flex items-center font-semibold text-green-600">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-currency-taka text-green-600"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M16.5 15.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                                <path d="M7 7a2 2 0 1 1 4 0v9a3 3 0 0 0 6 0v-.5" />
+                                <path d="M8 11h6" />
+                              </svg>
+                              <span className="mt-1.5">{food.priceInBd}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mt-12">
+                          <p className="mr-3">{food.weight}</p>
+                        </div>
+                      </div>
+                      <div
+                        className={`text-green-600 absolute top-2 right-2 ${
+                          food.checked ? "block" : "hidden"
+                        }`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler icon-tabler-circle-check-filled"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                            stroke-width="0"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <h2 className="text-xl font-bold text-gray-900 mt-8">
                   ডেলিভারী এড্রেস
                 </h2>
 
@@ -387,13 +439,13 @@ const Orders = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-10 pt-10 w-full md:w-1/2 relative">
+              <div className="  w-full md:w-1/2 ">
                 <h2 className="text-xl font-bold text-gray-900">
                   অর্ডার সামারি
                 </h2>
                 <div className="w-full mt-3">
                   {/* order summury */}
-                  <div className="mt-4 border-t border-gray-200 bg-white shadow-sm">
+                  <div className="mt-4 border-dashed border-t-2 border-gray-200 bg-white shadow-sm">
                     <h3 className="sr-only">Items in your cart</h3>
                     <ul role="list" className="divide-y divide-gray-200">
                       {orderdFood.map((food) => (
@@ -446,9 +498,10 @@ const Orders = () => {
                               </div>
                             </div>
                             <div className="mt-12">
-                              <button 
-                              onClick={()=>handleAddToCart(food.id)}
-                              className="hover:text-green-600 absolute top-6 right-6">
+                              <button
+                                onClick={() => handleAddToCart(food.id)}
+                                className="hover:text-green-600 absolute top-6 right-6"
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   class="icon icon-tabler icon-tabler-trash"
@@ -478,20 +531,67 @@ const Orders = () => {
                                   Quantity
                                 </label>
                                 <select
-                                  onChange={(e)=>(dispatch(updateQuantity({ id: food.id, quantity: e.target.value })))}
+                                  onChange={(e) =>
+                                    dispatch(
+                                      updateQuantity({
+                                        id: food.id,
+                                        quantity: e.target.value,
+                                      })
+                                    )
+                                  }
                                   id="quantity"
                                   defaultValue={food.quantity}
                                   name="quantity"
                                   className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm "
                                 >
-                                  <option className="hover:bg-green-100" value={1}>1</option>
-                                  <option className="hover:bg-green-100" value={2}>2</option>
-                                  <option className="hover:bg-green-100" value={3}>3</option>
-                                  <option className="hover:bg-green-100" value={4}>4</option>
-                                  <option className="hover:bg-green-100" value={5}>5</option>
-                                  <option className="hover:bg-green-100" value={6}>6</option>
-                                  <option className="hover:bg-green-100" value={7}>7</option>
-                                  <option className="hover:bg-green-100" value={8}>8</option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={1}
+                                  >
+                                    1
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={2}
+                                  >
+                                    2
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={3}
+                                  >
+                                    3
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={4}
+                                  >
+                                    4
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={5}
+                                  >
+                                    5
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={6}
+                                  >
+                                    6
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={7}
+                                  >
+                                    7
+                                  </option>
+                                  <option
+                                    className="hover:bg-green-100"
+                                    value={8}
+                                  >
+                                    8
+                                  </option>
                                 </select>
                               </div>
                             </div>
@@ -499,15 +599,32 @@ const Orders = () => {
                         </div>
                       ))}
                     </ul>
-                    
                   </div>
                   {/* order summary finised */}
-                  <div className="flex justify-between items-center border-t border-slate-300 pt-2">
+                  <div className="flex justify-between items-center border-dashed border-t-2 border-slate-300 pt-2">
+                    <h1 className="font-semibold">মোট</h1>
+                    <h1 className="font-semibold text-green-600">
+                      ট{" "}
+                      {orderdFood.reduce(
+                        (total, item) => total + item.quantity * item.price,
+                        0
+                      )}
+                    </h1>
+                  </div>
+                  <div className="flex justify-between items-center mt-6 py-2">
+                    <h1 className="font-semibold">ডেলিভারী চার্জ</h1>
+                    <h1 className="font-semibold text-green-600">
+                      ট {delivaryCharge === "৮০" ? 80 : 100}
+                    </h1>
+                  </div>
+                  <div className="flex justify-between items-center border-dashed border-t-2 border-slate-300 pt-2">
                     <h1 className="font-semibold">সর্বমোট</h1>
                     <h1 className="font-semibold text-green-600">
                       ট{" "}
-                      {orderdFood.reduce((total, item) => total + item.quantity * item.price, 0) +
-                        (delivaryCharge === "৮০" ? 80 : 100)}
+                      {orderdFood.reduce(
+                        (total, item) => total + item.quantity * item.price,
+                        0
+                      ) + (delivaryCharge === "৮০" ? 80 : 100)}
                     </h1>
                   </div>
                   <div className="flex justify-between items-center  mt-8">
@@ -518,8 +635,9 @@ const Orders = () => {
                   </div>
                   <button
                     onClick={onOrderSubmit}
+                    // onClick={notify}
                     disabled={name === "" || phone == "" ? true : false}
-                    className="rounded-[10px] bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center absolute bottom-0 right-0"
+                    className="rounded-[10px] bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center w-full mt-4"
                   >
                     <div className="flex gap-2 justify-center items-center">
                       <svg
@@ -547,6 +665,7 @@ const Orders = () => {
               </div>
             </div>
           </div>
+          <Toaster />
         </div>
       </div>
     </div>

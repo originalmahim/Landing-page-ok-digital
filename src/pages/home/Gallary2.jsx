@@ -46,6 +46,36 @@ const images = [
     url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411437365_863795805753719_8755839441510138374_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=xtKXX4OArnsAX-0edYW&_nc_ht=scontent.fdac5-2.fna&oh=00_AfA85Dzd2fen73UUo7RYtSsDUsqx35ulrZAyqNcOtA1gmg&oe=6587D7FC",
   },
 ];
+const photos = [
+  {
+    id: 1,
+    url: "/image.png",
+  },
+  {
+    id: 2,
+    url: "/image (1).png",
+  },
+  {
+    id: 3,
+    url: "/image (2).png",
+  },
+  {
+    id: 4,
+    url: "/image (3).png",
+  },
+  {
+    id: 5,
+    url: "/image.png",
+  },
+  {
+    id: 6,
+    url: "/image (1).png",
+  },
+  {
+    id: 7,
+    url: "/image (2).png",
+  },
+];
 
 const SwiperNavButtons = () => {
   const swiper = useSwiper();
@@ -137,7 +167,7 @@ const Gallary2 = () => {
               }}
               //   slidesPerView="auto"
             >
-              {images.map((image) => (
+              {photos.map((image) => (
                 <SwiperSlide key={image.id} >
                   <LightGallery
                     onInit={onInit}
