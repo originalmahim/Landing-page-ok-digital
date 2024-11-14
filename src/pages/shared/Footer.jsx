@@ -1,14 +1,13 @@
 import React from "react";
 import Container from "../../components/Container";
 import { Link } from "react-router-dom";
-import { BiHeart } from "react-icons/bi";
 
 const Footer = () => {
   return (
-    <div className="w-full mx-auto pb-10 bg-slate-900 dark:bg-slate-950 relative">
+    <div className="w-full mx-auto pb-10 bg-black relative">
       <Container>
         <footer className="footer py-16 text-slate-400  rounded-md">
-          <aside>
+          <aside className="hidden">
             <Link
               to="/"
               className="normal-case text-xl flex items-center gap-2"
@@ -33,9 +32,9 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-5">
             <nav className="space-y-5 flex flex-col">
               <header className="font-bold text-slate-300 ">
-                আমাদের ঠিকানা
+                যোগাযোগ
               </header>
-              <div className="link no-underline hover:text-green-600 flex gap-2 items-center">
+              <div className="link no-underline hidden hover:text-green-600  gap-2 items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon icon-tabler icon-tabler-map-pin"
@@ -71,9 +70,9 @@ const Footer = () => {
                   <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
                   <path d="M3 7l9 6l9 -6" />
                 </svg>
-                ecoeats.bd@gmail.com
+                itsok.bangladesh@gmail.com
               </div>
-              <div className="link no-underline hover:text-green-600 flex gap-2 items-center">
+              <div className="link hidden no-underline hover:text-green-600  gap-2 items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon icon-tabler icon-tabler-headset"
@@ -100,7 +99,7 @@ const Footer = () => {
                 সোশ্যাল মিডিয়া
               </header>
               <div className="flex gap-2 items-center">
-                <a className="h-10 cursor-pointer w-10 flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
+                <a className="h-10 hidden cursor-pointer w-10  items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-users rounded-md"
@@ -155,7 +154,7 @@ const Footer = () => {
                     <path d="M3 7l9 6l9 -6" />
                   </svg>
                 </a>
-                <a className="h-10 w-10 cursor-pointer flex items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
+                <a className="h-10 w-10 cursor-pointer hidden items-center justify-center rounded-[10px] bg-slate-700 hover:bg-green-600 hover:text-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="icon icon-tabler icon-tabler-headset"
@@ -198,9 +197,9 @@ const Footer = () => {
               <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
               <path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173"></path>
             </svg>
-            <p>2017-2023 CyberSpace. All rights reserved.</p>
+            <p>2023-2024 It's OK. All rights reserved.</p>
           </aside>
-          <div className="mt-8">
+          <div className="mt-8 hidden">
             <h1>Fueled By CyberSpace Digital</h1>
           </div>
         </footer>

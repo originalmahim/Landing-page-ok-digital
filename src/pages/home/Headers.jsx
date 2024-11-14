@@ -1,43 +1,88 @@
 import React from "react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
-import { Player, BigPlayButton } from "video-react";
 import "video-react/dist/video-react.css"; // import css
 
+import ReactPlayer from "react-player";
+import { useNavigate } from "react-router-dom";
+import WhyWeBest from "./WhyWeBest";
+
+
 const benefits = [
-  "গরুর মাংস",
-  "হাঁসের মাংস",
-  "মাছ",
-  "নিহারী",
-  "খাসির মাংস",
-  "মুড়ো ঘণ্ট",
-  "সবজি",
-  "হালিম",
-  "মুরগির মাংস",
-  "সবজি",
-  "খিচুড়ি",
-  "চটপটি",
+  "ব্যবসায় চ্যাটজিপিটির ব্যবহার করে গ্রোথ",
+  "কিভাবে ব্যবসার আইডিয়া জেনারেট করবেন",
+  "অর্গানিক রিচ বাড়াতে কনটেন্ট মেকিং আইডিয়া",
+  "সল্প পুঁজি দিয়ে কিভাবে ব্যাবসা করবেন",
+];
+const vul = [
+  "বিজনেস আইডিয়া সিলেক্ট করতে না পারা ",
+  "কোথায় বেশি ফোকাস দিবো বুঝতে না পারা ",
+  "ব্যবসায় সেল না পেয়ে হতাশ হয়ে যাওয়া ",
 ];
 
+
+
+
+
 const Headers = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div id="about" className="mx-auto max-w-7xl">
-        <div className="mx-auto flex w-full flex-col gap-16 bg-white/5  pt-6 ring-1 ring-white/10 sm:rounded-3xl lg:flex-row lg:items-center">
+        <div className="mx-auto flex w-full flex-col gap-16 bg-black   pt-2  sm:rounded-3xl lg:flex-row lg:items-center">
           <div className="w-full mx-auto flex-auto">
-            <h2 className="text-3xl font-bold tracking-tight text-green-600 sm:text-4xl">
-              খুলনার বিখ্যাত চুইঝাল!
-            </h2>
-            <p className="mt-6 text-xl leading-8 text-slate-500 text-justify">
-              দৈনিক একঘেয়েমি রান্না খেতে খেতে বিরক্ত? রান্নায় এমন কিছু ব্যবহার
-              করতে চান যেন রান্নার স্বাদ হয় আরো স্পেশাল? প্রতিদিনের রান্নায়
-              টুইস্ট আনতে রান্নায় ব্যবহার করুন “চুইঝাল”। ঝাঁঝালো ঝাঁঝ যুক্ত এই
-              মসলা রান্নায় মিশে দারুন স্বাদ তৈরি করে। যেকোন রান্নায় যোগ করে এক
-              অতুলনীয় ফ্লেভার। বিভিন্ন মুখরোচক খাবারকে আরো বেশি মুখরোচক করে
-              তোলে এই চুইঝাল। যেসব রান্নায় ব্যবহার করা যায়...
-            </p>
+            <h2 className="text-[28px] font-bold tracking-tight text-green-600 sm:text-3xl">
+            ব্যবসার শুরুতে ৩ টি প্রধান চ্যালেঞ্জ
+            </h2> 
             <ul
               role="list"
-              className="mt-10 grid grid-cols-2 gap-x-8 gap-y-3 text-base leading-7 sm:grid-cols-3"
+              className="mt-2 grid grid-cols-1 gap-x-8 gap-y-3 text-base leading-7 sm:grid-cols-2"
+            >
+              {vul.map((benefit) => (
+                <li
+                  key={benefit}
+                  className="flex gap-x-3 text-xl text-slate-400"
+                >
+                  <CheckCircleIcon
+                    className="h-7 w-5 flex-none text-yellow-500  "
+                    aria-hidden="true"
+                  />
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+            <div className='mt-6 w-full'>
+                    <img className='w-full  rounded-sm ' src='https://res.cloudinary.com/dphjki297/image/upload/v1731165356/wrjvctfi5yritunnkgst.jpg' />
+                </div>
+                <div
+  id="cart"
+  className="mt-3 items-center justify-center text-center"
+  onClick={() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "AddToCart",
+      Click_id: "AddToCart",
+    });
+    navigate("/chelkout/");
+  }}
+>
+  <button id="carted"
+    className="rounded-[10px] cursor-pointer bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center"
+  >
+    <div id="add_to_cart" className="flex gap-2 justify-center items-center">
+      ফ্রি তে ডাউনলোড করুন
+    </div>
+  </button>
+</div>
+            <p className="my-6 text-xl leading-8 text-yellow-500 text-justify">
+            ব্যাবসার বিভিন্ন Idea জেনারেশন প্রসেস, অর্গানিকরিচ বাড়াতে বিভিন্ন কনটেন্ট আইডিয়ার খুটিনাটি এবং সিক্রেটস জানতে ফ্রিতে ডাউনলোড করুন ই-বুকটি ।
+            </p>
+            
+            <h2 className="text-3xl mt-4  font-bold tracking-tight text-green-600 sm:text-4xl">
+            যা আছে এই ই-বুকটিতে -
+            </h2>
+            <ul
+              role="list"
+              className="mt-2 grid grid-cols-1 gap-x-8 gap-y-3 text-base leading-7 sm:grid-cols-2"
             >
               {benefits.map((benefit) => (
                 <li
@@ -45,52 +90,37 @@ const Headers = () => {
                   className="flex gap-x-3 text-xl text-slate-400"
                 >
                   <CheckCircleIcon
-                    className="h-7 w-5 flex-none  "
+                    className="h-7 w-5 flex-none text-yellow-500  "
                     aria-hidden="true"
                   />
                   {benefit}
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex">
-              <a
-                href="#"
-                className="rounded-[10px] bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center"
-              >
-                <div className="flex gap-2 justify-center items-center">
-                  {/* <img className="h-5 w-5 stroke-white" src="/icons/star.svg" alt="" /> */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-star"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                  </svg>
-                  <span className="pt-[4px] text-base">
-                    কাস্টমার রিভিউ দেখুন
-                  </span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div className="h-full  w-80 md:w-full mx-auto flex-none rounded-[10px] object-cover shadow-xl lg:max-w-sm">
-            <Player
-              src="/icons/video.mp4"
-              // fluid={false}
-              // height={547}
-              // width={320}
-              poster="https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411196028_863897912410175_7176641708716339469_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=S2KLsdyEx4wAX8-6E9q&_nc_ht=scontent.fdac5-2.fna&oh=00_AfAlgruH4D3W65FjFKKJlwZOTQjN_wLilSbQrtvnkSOKlg&oe=6587E571"
-            >
-              <BigPlayButton position="center" />
-            </Player>
+                  <h1 className="text-center text-red-500 my-3 line-through text-2xl">রেগুলার প্রাইসঃ <span>২০০</span> টাকা</h1>
+                  <h1 className="text-center text-yellow-400 my-3 text-2xl">ফ্রি অফার দ্রুতই শেষ হয়ে যাবে</h1>
+               
+            <div
+  id="cart"
+  className="mt-3 items-center justify-center text-center"
+  onClick={() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "AddToCart",
+      Click_id: "AddToCart",
+    });
+    navigate("/chelkout/");
+  }}
+>
+  <button id="carted"
+    className="rounded-[10px] cursor-pointer bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center"
+  >
+    <div id="add_to_cart" className="flex  gap-2 justify-center items-center">
+      দ্রুত ডাউনলোড করুন
+    </div>
+  </button>
+</div>
+
           </div>
         </div>
       </div>
@@ -99,3 +129,4 @@ const Headers = () => {
 };
 
 export default Headers;
+

@@ -1,48 +1,49 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 const faqs = [
   {
-    question: "চুই ঝাল কি?",
+    question: "ই-বুকটি কত পৃষ্ঠার ?",
     answer:
-      "চুইঝাল পানের লতার মত এক ধরনের গাছ, এর শিকড় ও কান্ড খাবারে ব্যবহার হয়ে থাকে। চুইঝাল মসলা ও ঝাল হিসেবে সবচেয়ে বেশি ব্যবহৃত হয়। এটি খেতে অনেকটা আদা ও গোলমরিচের মত ঝাঝালো, রান্নার পর টুকরোগুলো চুষে বা চিবিয়ে খাওয়া হয়। ঝাল স্বাদের হলেও চুইয়ের নিজস্ব স্বাদ ও ঘ্রাণ আছে। খুলনা অঞ্চলে চুইঝালকে মসলা হিসেবে ব্যবহার করে চুইঝালের মাংস রান্না করা হয়।",
+      "ই-বুকটি ৩০ ",
+  },
+ 
+  {
+    question: " ফাইলগুলোর এক্সেস কিভাবে পাবো ?",
+    answer:
+      "আমাদের সিস্টেম টা এতোটাই সহজ,যে কখনো ই-বুক ক্রয় করেনি তার জন্যেও কোন সমস্যা হবে না। মাত্র ১ ক্লিকে আমাদেরকে পেমেন্ট করার ১ মিনিটের মধ্যেই আপনাকে Google Drive File এক্সেস দিয়ে দেওয়া হবে। ",
+  }, 
+  {
+    question: "পেমেন্ট কীভাবে করবো ?",
+    answer:
+      "ফাইলগুলি কেনার জন্য Bkash / Nagad এ 01407975656 (পার্সনাল নাম্বার) - এই নাম্বারে সেন্ড মানি করুন",
   },
   {
-    question: "চুই ঝালের রান্নার বিশেষত্ব কি?",
+    question: "ফাইলগুলি দেখার জন্য কী প্রয়োজন হবে ?",
     answer:
-      "রান্নায় এর ঝাল খাবারের স্বাদ বাড়ায় আবার শরীরেরও কোনো ক্ষতি করে না। ঝোল জাতীয় সব কিছুতেই স্বাদ তৈরি করে। এদের কাণ্ড, শিকড়, পাতা, ফুল, ফলের ঔষধি গুণ আছে। চুই ঝাল দিয়ে রান্না করা তরকারিতে কড়া ঝাঁঝালো সুঘ্রাণ পাওয়া যায়। মাংস ছাড়াও ভুনা খিচুড়ি, মাছ ভুনা, বিভিন্ন রকমের তরকারীতে চুই ঝাল ব্যবহার করা হয়। ",
+      "Internet connection (WIFI or Mobile Internet), Smartphone or PC",
   },
+  
   {
-    question: "কতটুকু চুইঝালে কয়বার রান্না করা যায়?",
+    question: "আপনাদের সাথে কীভাবে যোগাযোগ করবো ?",
     answer:
-      "৫০০ গ্রাম চুইঝাল দিয়ে অনায়াসেই ৮ থেকে ১০ কেজি মাংস রান্না করা যায়। তবে কেউ যদি চুইবিলাসী হয় তার হিসাব ভিন্ন। সাধারনত ১ কেজি মাংসে ৫০-৬০ গ্রাম চুইঝালই যথেষ্ট। তাই প্রতিবারে যদি ১ কেজি করে মাংস রান্না করা হয় তাহলে ৫০০ গ্রাম চুইঝাল দিয়ে খুব ভালোভাবেই ৮-১০ বার রান্না করা যাবে।",
-  },
-  {
-    question: "চুইঝাল কিভাবে কাটব?",
-    answer:
-      "দুই রকম; গাছ চুইঝাল ও এটো চুইঝাল। আপনি যদি সেই রকম লেভেলের ঝাল লাভার হয়ে থাকেন তাহলে গাছ চুইঝাল দিতে পারে আপনাকে পারফেক্ট ঝালের তৃপ্তি। যত বেশি চিবতে থাকবেন তত এর থেকে ঝাল বের হতে থাকবে। তবে এটো চুইঝাল মোটা সাইজের গুলো যদি পছন্দ করে থাকেন তাহলে ঝালের পরিমাণ একটু কমবে। কিন্তু মাঝারি সাইজের এটো চুইঝাল গুলো আবার বেশ ঝাল হয়ে থাকে।",
-  },
-  {
-    question: "দেশি ও পাহাড়ী চুইঝাল এর পার্থক্য কি?",
-    answer:
-      "পাহাড়ী চুইঝাল দেশের পাহাড়ী অঞ্চল অর্থাৎ চট্টগ্রাম, রাঙামাটি পার্বত্য অঞ্চলে জন্মে থাকে। এর রঙ খয়েরী অথবা লালচে সাদা, রান্না হতে বেশ সময় লাগে, খেতে মোটেও সুস্বাদু নয় এবং কাঠের মত শক্ত হয়ে থাকে। পাহাড়ী চুই এর বাহ্যিক অংশে কোনো শিকড় থাকে না। অসাধু ব্যবসায়ীরা দেশি চুই ঝাল এর ভিতর পাহাড়ী চুই মিশিয়ে কাস্টমারকে দিয়ে দেয়। সহজে বোঝার উপায় না থাকায় গ্রাহক প্রতারিত হয়ে থাকেন।",
-  },
-  {
-    question: "কি কি ঔষধি গুণ রয়েছে চুইঝালে?",
-    answer:
-      "গ্যাস্ট্রিক সমস্যার সমাধান করে ও কোষ্ঠকাঠিন্য দূর করে। খাবারের রুচি বাড়াতে এবং ক্ষুধামন্দা দূর করতে কার্যকর ভূমিকা রাখে। পাকস্থলী ও অন্ত্রের প্রদাহ সারাতে চুইঝাল অনেক উপকারী। স্নায়ুবিক উত্তেজনা ও মানসিক অস্থিরতা প্রশমন করে। ঘুমের ওষুধ হিসেবে কাজ করে এবং শারীরিক দুর্বলতা কাটাতে এবং শরীরের ব্যথা সারায়। সদ্য প্রসূতি মায়েদের শরীরের ব্যথা দ্রুত কমাতে ম্যাজিকের মতো সাহায্য করে। কাশি, কফ, হাঁপানি, শ্বাসকষ্ট, ডায়রিয়া ও রক্তস্বল্পতা দূর করে। এক ইঞ্চি পরিমাণ চুই লতার সাথে আদা পিষে খেলে সর্দি সমস্যা থেকে মুক্তি পাওয়া যায়।",
+      "যেকোন জিজ্ঞাসা ও অর্ডারজনিত সমস্যায় নক করুন আমাদের ফেসবুক পেজে। আমরা আছি সকাল ১০ টা থেকে রাত ৮ টা পর্যন্ত আপনার সেবায়।",
   },
   // More questions...
 ];
 
 const Faq = () => {
+  const navigate = useNavigate();
+
   return (
-    <div id="faq" className="my-28">
+    <div id="faq" className="my-2">
+      
       <h1 className="text-3xl font-bold text-center text-green-600">
-        সচরাচর জিজ্ঞাস্য প্রশ্নাবলি
+        সচরাচর জিজ্ঞাসিত প্রশ্নাবলি
       </h1>
-      <div className="bg-white">
+      <div className="bg-black">
         <div className="mx-auto max-w-7xl   lg:px-8 ">
           <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
             <h1 className="divide-y divide-gray-900/10"></h1>
@@ -52,7 +53,7 @@ const Faq = () => {
                   {({ open }) => (
                     <>
                       <dt>
-                        <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                        <Disclosure.Button className="flex w-full items-start justify-between text-left text-white">
                           <span className="text-xl font-semibold leading-7">
                             {faq.question}
                           </span>
@@ -72,7 +73,7 @@ const Faq = () => {
                         </Disclosure.Button>
                       </dt>
                       <Disclosure.Panel as="dd" className="mt-2 pr-12">
-                        <p className="text-base leading-7 text-gray-600">
+                        <p className="text-base leading-7 text-yellow-600">
                           {faq.answer}
                         </p>
                       </Disclosure.Panel>
@@ -82,6 +83,28 @@ const Faq = () => {
               ))}
             </dl>
           </div>
+          <div
+  id="cart"
+  className="mt-3 items-center justify-center text-center"
+  onClick={() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "AddToCart",
+      Click_id: "AddToCart",
+    });
+    navigate("/chelkout/");
+  }}
+>
+  <button id="carted"
+    className="rounded-[10px] cursor-pointer bg-green-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700 items-center"
+  >
+    <div id="add_to_cart" className="flex gap-2 justify-center items-center">
+      <img className="h-5 w-5 -pt-2" src="/icons/orders.svg" alt="" />
+      <span className="pt-[4px]">ডাউনলোড করুন</span>
+    </div>
+  </button>
+</div>
+
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const MainLayout = () => {
 
   return (
     <>
-      <div className="max-w-full bg-white dark:bg-slate-900 overflow-hidden relative mx-auto">
+      <div className="max-w-full bg-black  overflow-hidden relative mx-auto">
         <div className="fixed z-50 top-0 w-full">
           <Navbar></Navbar>
         </div>

@@ -16,65 +16,32 @@ import "lightgallery/css/lg-thumbnail.css";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 
-const images = [
-  {
-    id: 1,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411071827_864466802353286_1798985628233004209_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=_-K7JzHYGjwAX_CqnKT&_nc_ht=scontent.fdac5-2.fna&oh=00_AfCGyJqvQFORraW4L-ffAcW_1vBUpJMEdPpF3R6Y1A4UVA&oe=65878ABC",
-  },
-  {
-    id: 2,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411437365_863795805753719_8755839441510138374_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=xtKXX4OArnsAX-0edYW&_nc_ht=scontent.fdac5-2.fna&oh=00_AfA85Dzd2fen73UUo7RYtSsDUsqx35ulrZAyqNcOtA1gmg&oe=6587D7FC",
-  },
-  {
-    id: 3,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411131277_862384709228162_7122716054042689418_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=fmJ3Tnb0OxcAX_-wxAy&_nc_ht=scontent.fdac5-2.fna&oh=00_AfAxQK-bUlQjxzzGriaDxYXa3Zq9QJ6mz6svJi2VIQP5Vw&oe=658846F7",
-  },
-  {
-    id: 4,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/409009017_858145352985431_383209555235447952_n.jpg?stp=cp6_dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=F6KUTcIA6ZoAX8fspDM&_nc_ht=scontent.fdac5-2.fna&oh=00_AfA_mfQ0HCEUFaiGXJ2wlnEanCo97b6vaHQW5uouTMp9MA&oe=6587B32D",
-  },
-  {
-    id: 5,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411437365_863795805753719_8755839441510138374_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=xtKXX4OArnsAX-0edYW&_nc_ht=scontent.fdac5-2.fna&oh=00_AfA85Dzd2fen73UUo7RYtSsDUsqx35ulrZAyqNcOtA1gmg&oe=6587D7FC",
-  },
-  {
-    id: 6,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/409009017_858145352985431_383209555235447952_n.jpg?stp=cp6_dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=F6KUTcIA6ZoAX8fspDM&_nc_ht=scontent.fdac5-2.fna&oh=00_AfA_mfQ0HCEUFaiGXJ2wlnEanCo97b6vaHQW5uouTMp9MA&oe=6587B32D",
-  },
-  {
-    id: 7,
-    url: "https://scontent.fdac5-2.fna.fbcdn.net/v/t39.30808-6/411437365_863795805753719_8755839441510138374_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=xtKXX4OArnsAX-0edYW&_nc_ht=scontent.fdac5-2.fna&oh=00_AfA85Dzd2fen73UUo7RYtSsDUsqx35ulrZAyqNcOtA1gmg&oe=6587D7FC",
-  },
-];
 const photos = [
   {
     id: 1,
-    url: "/image.png",
+    url: "https://i.ibb.co/VSYVDpL/Screenshot-2024-05-13-234453.png",
   },
   {
     id: 2,
-    url: "/image (1).png",
+    url: "https://business.pizion.com/wp-content/uploads/2024/05/Screenshot-2024-05-06-at-1.47.33-AM.png",
   },
   {
     id: 3,
-    url: "/image (2).png",
+    url: "https://business.pizion.com/wp-content/uploads/2024/05/Screenshot-2024-05-06-at-1.54.18-AM.png",
   },
   {
     id: 4,
-    url: "/image (3).png",
+    url: "https://business.pizion.com/wp-content/uploads/2024/05/Screenshot-2024-05-06-at-1.52.50-AM.png",
   },
   {
     id: 5,
-    url: "/image.png",
+    url: "https://business.pizion.com/wp-content/uploads/2024/05/Screenshot-2024-05-06-at-1.48.33-AM.png",
   },
   {
     id: 6,
-    url: "/image (1).png",
+    url: "https://business.pizion.com/wp-content/uploads/2024/05/Screenshot-2024-05-06-at-1.44.14-AM.png",
   },
-  {
-    id: 7,
-    url: "/image (2).png",
-  },
+  
 ];
 
 const SwiperNavButtons = () => {
@@ -133,9 +100,9 @@ const Gallary2 = () => {
   };
 
   return (
-    <div className="">
+    <div className="mt-10">
       <h1 className="text-3xl font-bold text-center text-green-600 mb-12">
-        চুইঝাল গ্যালারী
+      কন্টেন্ট প্রিভিউ গ্যালারী
       </h1>
       <div id="gallary">
         <div className="App relative">
